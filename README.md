@@ -176,33 +176,29 @@ allure open results/allure-report
 
 ---
 
-## ❓ Problemas comuns
-
-| Sintoma | Causa provável | Solução |
-|---|---|---|
-| `pip install` mostra caminho em `AppData` | Venv não foi ativado (passo 3) | Rode o comando de ativação do passo 3 de novo |
-| Script `.ps1` não executa (PowerShell) | Política de execução do Windows bloqueia scripts | Rode `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` antes do passo 3 |
-| `robot` não é reconhecido como comando | Venv não ativado, ou pacote não instalado | Confirme `(.venv)` no prompt e refaça o passo 4 |
-| `report.html`/`log.html` aparecem na raiz do projeto | Comando rodado sem `--outputdir results` | Sempre inclua `--outputdir results` no comando |
-| `scoop`/`choco`/`allure` não reconhecido mesmo após instalar e abrir um terminal novo | O editor (ex: VS Code) mantém o `PATH` antigo em memória mesmo em terminais novos, enquanto o programa inteiro não for reiniciado | Feche o **programa inteiro** (não só a aba do terminal) e abra de novo. Se persistir, teste em um PowerShell aberto direto do Windows, fora do editor |
-| Relatório Allure abre com "0 test cases" / tudo vazio | `allure serve`/`generate` apontando para uma pasta diferente da usada pelo listener, ou pasta de resultados vazia (testes não rodaram antes) | Rode primeiro o Passo 2 (comando de testes com `--listener allure_robotframework:results/allure-results`), depois o Passo 3 (`allure serve`) — confirme que a pasta `results/allure-results` tem arquivos antes de abrir |
-| Relatório Allure não abre no navegador certo | Navegador padrão do sistema não é o Chrome | Copie a URL `localhost` exibida no terminal após `allure serve` e cole manualmente no Chrome |
-
----
-
 ## 📸 Evidências de execução
 
 **Console (Robot Framework nativo + Resumo da Execução):**
 
 ![Console - árvore de suites](docs/screenshots/console-execucao-arvore-suites.png)
+*Console nativo do Robot Framework, mostrando a árvore de suites por recurso/método/status.*
+
 ![Console - Resumo da Execução](docs/screenshots/console-resumo-da-execucao.png)
+*Resumo da Execução gerado pelo `SummaryListener.py`: total de cenários, aprovados, reprovados e tempo de execução.*
 
 **Relatório Allure:**
 
 ![Allure - Overview](docs/screenshots/allure-overview.png)
+*Visão geral do Allure: total de test cases e percentual de sucesso da execução.*
+
 ![Allure - Suites](docs/screenshots/allure-suites.png)
+*Cenários organizados por suite (recurso), com o detalhamento de um teste individual.*
+
 ![Allure - Behaviors](docs/screenshots/allure-behaviors.png)
+*Todos os cenários listados por comportamento (Behaviors), com tempo de execução individual.*
+
 ![Allure - Graphs](docs/screenshots/allure-graphs.png)
+*Gráficos consolidados: status geral, severidade dos testes e duração por cenário.*
 
 ---
 
