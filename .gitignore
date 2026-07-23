@@ -1,0 +1,19 @@
+# Ambiente
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Cache de token
+.token-cache.json
+
+# Resultados de execucao do Robot Framework (destino correto: results/)
+results/
+# Seguranca extra: caso o comando seja rodado sem --outputdir por engano
+/log.html
+/report.html
+/output.xml
+
+# Logs de execucao por cenario (mantemos a pasta, ignoramos o conteudo gerado)
+logs/**/*.json

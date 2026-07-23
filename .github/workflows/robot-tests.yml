@@ -1,0 +1,42 @@
+name: Robot Framework - API Contract Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Executar testes (Robot Framework)
+        env:
+          API_BASE_URL: https://dummyjson.com
+          AUTH_USERNAME: emilys
+          AUTH_PASSWORD: emilyspass
+        run: >
+          robot --outputdir results
+          --listener resources/listeners/SummaryListener.py
+          --listener allure_robotframework:results/allure-results
+          tests/
+
+      - name: Publicar relatorios como artefato
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-framework-report
+          path: results/
